@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { CircleUser, Menu, Package2, Plus } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { navItems } from "../App";
 
@@ -20,7 +20,9 @@ const Layout = () => {
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <MobileSidebar />
-          <div className="w-full flex-1">{/* Add nav bar content here! */}</div>
+          <div className="w-full flex-1">
+            <Header />
+          </div>
           <UserDropdown />
         </header>
         <main className="flex-grow p-4 overflow-auto">
@@ -37,7 +39,7 @@ const Sidebar = () => (
       <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
         <NavLink to="/" className="flex items-center gap-2 font-semibold">
           <Package2 className="h-6 w-6" />
-          <span>Acme Inc</span>
+          <span>Todo App</span>
         </NavLink>
       </div>
       <div className="flex-1">
@@ -49,6 +51,18 @@ const Sidebar = () => (
             </SidebarNavLink>
           ))}
         </nav>
+        <div className="mt-4 px-2 lg:px-4">
+          <h2 className="text-xs font-semibold uppercase text-muted-foreground mb-2">
+            Projects
+          </h2>
+          <nav className="grid gap-2">
+            {/* List of projects will go here */}
+            <Button variant="outline" size="sm" className="w-full">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Project
+            </Button>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
@@ -69,16 +83,38 @@ const MobileSidebar = () => (
           className="flex items-center gap-2 text-lg font-semibold mb-4"
         >
           <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+          <span className="sr-only">Todo App</span>
         </NavLink>
         {navItems.map((item) => (
           <SidebarNavLink key={item.to} to={item.to}>
             {item.title}
           </SidebarNavLink>
         ))}
+        <div className="mt-4">
+          <h2 className="text-xs font-semibold uppercase text-muted-foreground mb-2">
+            Projects
+          </h2>
+          <nav className="grid gap-2">
+            {/* List of projects will go here */}
+            <Button variant="outline" size="sm" className="w-full">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Project
+            </Button>
+          </nav>
+        </div>
       </nav>
     </SheetContent>
   </Sheet>
+);
+
+const Header = () => (
+  <div className="flex items-center justify-between">
+    <h1 className="text-xl font-bold">Inbox</h1>
+    <Button variant="primary">
+      <Plus className="h-4 w-4 mr-2" />
+      Add Task
+    </Button>
+  </div>
 );
 
 const UserDropdown = () => (
@@ -93,7 +129,7 @@ const UserDropdown = () => (
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem>Settings</DropdownMenuItem>
-      <DropdownMenuItem>Support</DropdownMenuItem>
+      <DropdownMenuItem>Help</DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem>Logout</DropdownMenuItem>
     </DropdownMenuContent>
